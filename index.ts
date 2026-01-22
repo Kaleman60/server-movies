@@ -1,6 +1,6 @@
 import { initDB } from "./db/init";
 import { getAllMovies, getMovieById, getMoviesByTitle } from "./models/movies";
-import express from "express";
+import express, { request } from "express";
 import type { Request, Response, NextFunction } from "express";
 
 const app = express();
@@ -9,6 +9,9 @@ const db = await initDB()
 
 const logMiddleware = (req: Request, res: Response, next: NextFunction) => {
     console.log(req.method, req.url, new Date().toISOString())
+        if (req.method === "GET") {
+            console.log(req.query)
+        }
     next()
 }
 
