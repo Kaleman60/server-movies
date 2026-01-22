@@ -1,5 +1,5 @@
 import { initDB } from "./db/init";
-import { getAllMovies, getMovieById, getMoviesByTitle } from "./models/movies";
+import { getMovies } from "./models/movies";
 import express, { request } from "express";
 import type { Request, Response, NextFunction } from "express";
 
@@ -18,10 +18,13 @@ const logMiddleware = (req: Request, res: Response, next: NextFunction) => {
 app.use(logMiddleware)
 
 app.get("/movies", (req, res) => {
-    const title = req.query.title
-    const peliculas = getMoviesByTitle(db, title)
-    res.json(peliculas)
-
+    const {title, genres} = req.query
+    const filters = {
+        title: typeof title === "string" ? title : undefined,
+        genres: typeof genres === "string" ? genres : undefined
+    }
+    const movies = getMovies(db, filters)
+    res.json(movies)
 })
 
 app.listen(PORT, () => {
