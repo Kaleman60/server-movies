@@ -18,7 +18,8 @@ const logMiddleware = (req: Request, res: Response, next: NextFunction) => {
 app.use(logMiddleware)
 
 app.get("/movies", (req, res) => {
-    const peliculas = getAllMovies(db)
+    const title = req.query.title
+    const peliculas = getMoviesByTitle(db, title)
     res.json(peliculas)
 
 })
@@ -26,8 +27,4 @@ app.get("/movies", (req, res) => {
 app.listen(PORT, () => {
     console.log(`Servidor funcionando en puerto ${PORT}`)
 })
-
-
-
-
 
