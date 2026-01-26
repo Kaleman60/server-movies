@@ -8,3 +8,24 @@
 const respuesta = await fetch("/movies")
 const movies = await respuesta.json()
 console.log(movies)
+
+const tableBody = document.querySelector("#tabla")
+console.log(tableBody)
+
+movies.forEach(movie => {
+    console.log(movie)
+    const tr = document.createElement("tr")
+    const tdID = document.createElement("td")
+    const tdTitle = document.createElement("td")
+    const tdGenres = document.createElement("td")
+
+    tdID.textContent = movie.id
+    tdTitle.textContent = movie.title
+    tdGenres.textContent = movie.genres
+
+    tr.appendChild(tdID)
+    tr.appendChild(tdTitle)
+    tr.appendChild(tdGenres)
+    tableBody.appendChild(tr)
+
+})
