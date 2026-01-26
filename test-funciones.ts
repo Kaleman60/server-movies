@@ -1,7 +1,8 @@
 import { initDB } from "./db/init";
 import {Database} from "bun:sqlite";
-import {getMoviesByGenre, getMoviesByTitleAndGenre} from "./models/movies";
+import {getMoviesByGenre, getMoviesByTitleAndGenre, insertMovie} from "./models/movies";
 
 const db: Database = await initDB();
-const m1 = getMoviesByGenre(db, "Action");
-console.log(m1)
+insertMovie(db, "Prueba de pelicula", "Drama");
+const movies = getMoviesByTitleAndGenre(db, "Prueba", "Drama");
+console.log(movies);

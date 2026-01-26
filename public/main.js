@@ -12,7 +12,9 @@ console.log(movies)
 const tableBody = document.querySelector("#tabla")
 console.log(tableBody)
 
-movies.forEach(movie => {
+movies.forEach(movie => createMovie(movie))
+
+function createMovie(movie) {
     console.log(movie)
     const tr = document.createElement("tr")
     const tdID = document.createElement("td")
@@ -27,5 +29,5 @@ movies.forEach(movie => {
     tr.appendChild(tdTitle)
     tr.appendChild(tdGenres)
     tableBody.appendChild(tr)
+}
 
-})
